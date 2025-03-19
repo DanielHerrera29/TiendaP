@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="303.0" prefWidth="591.0" xmlns="http://javafx.com/javafx/8"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.Ejercicio.controller.ClienteController">
+   <children>
+      <Button layoutX="300.0" layoutY="240.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Editar Cliente" onAction="#handleEditarCliente"/>
+      <Button layoutX="36.0" layoutY="240.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Insertar Cliente" onAction="#handleInsertarCliente"/>
+      <Button layoutX="161.0" layoutY="240.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Iniciar Sesión" onAction="#handleLogin"/>
+      <Button layoutX="443.0" layoutY="240.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Borrar Cliente" onAction="#handleBorrarCliente"/>
+      <TextField layoutX="172.0" layoutY="112.0" prefHeight="25.0" prefWidth="269.0" text="ID" fx:id="txtId"/>
+      <TextField layoutX="174.0" layoutY="166.0" prefHeight="25.0" prefWidth="269.0" text="Nombre" fx:id="txtNombre"/>
+      <Label layoutX="235.0" layoutY="45.0" text="Inicio sesion">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
