@@ -1,7 +1,6 @@
 package co.edu.poli.Ejercicio.controller;
 
 import java.util.Date;
-
 import co.edu.poli.Ejercicio.model.Certificacion;
 import co.edu.poli.Ejercicio.model.Evaluacion;
 import co.edu.poli.Ejercicio.model.Proveedor;
