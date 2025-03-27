@@ -1,32 +1,22 @@
 package co.edu.poli.Ejercicio.model;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Certificacion {
-    private String tipo;
-    private Date fechaEmision;
-    private String entidadEmisora;
-    
-    public Certificacion(String tipo, Date fechaEmision, String entidadEmisora) {
-        this.tipo = tipo;
+    private String id;
+    private String nombre;
+    private LocalDate fechaEmision;
+    private LocalDate fechaExpiracion;
+
+    public Certificacion(String id, String nombre, LocalDate fechaEmision, LocalDate fechaExpiracion) {
+        this.id = id;
+        this.nombre = nombre;
         this.fechaEmision = fechaEmision;
-        this.entidadEmisora = entidadEmisora;
+        this.fechaExpiracion = fechaExpiracion;
     }
-    
-    public String getTipo() {
-        return tipo;
-    }
-    
-    public Date getFechaEmision() {
-        return fechaEmision;
-    }
-    
-    public String getEntidadEmisora() {
-        return entidadEmisora;
-    }
-    
-    @Override
-    public String toString() {
-        return "Certificación: " + tipo + ", emitida por " + entidadEmisora + " en " + fechaEmision;
-    }
+
+    // Getters
+    public String getId() { return id; }
+    public String getNombre() { return nombre; }
+    public LocalDate getFechaEmision() { return fechaEmision; }
+    public LocalDate getFechaExpiracion() { return fechaExpiracion; }
 }

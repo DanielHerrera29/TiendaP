@@ -1,122 +1,96 @@
 package co.edu.poli.Ejercicio.model;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Proveedor {
+
     private String id;
     private String nombre;
-    private List<Producto> productos;
+    private String contacto;
     private List<Certificacion> certificaciones;
     private List<Evaluacion> evaluaciones;
     private PoliticaEntrega politicaEntrega;
-    
-    // Constructor privado para usar con el patrón Builder
-    private Proveedor() {
-        this.productos = new ArrayList<>();
-        this.certificaciones = new ArrayList<>();
-        this.evaluaciones = new ArrayList<>();
+
+    // Constructor privado para usar con el Builder
+    private Proveedor(String id, String nombre, String contacto, List<Certificacion> certificaciones, List<Evaluacion> evaluaciones, PoliticaEntrega politicaEntrega) {
+        this.id = id;
+        this.nombre = nombre;
+        this.contacto = contacto;
+        this.certificaciones = certificaciones;
+        this.evaluaciones = evaluaciones;
+        this.politicaEntrega = politicaEntrega;
     }
-    
+
     // Getters
-    public String getId() {
-        return id;
-    }
-    
-    public String getNombre() {
-        return nombre;
-    }
-    
-    public List<Producto> getProductos() {
-        return productos;
-    }
-    
-    public List<Certificacion> getCertificaciones() {
-        return certificaciones;
-    }
-    
-    public List<Evaluacion> getEvaluaciones() {
-        return evaluaciones;
-    }
-    
-    public PoliticaEntrega getPoliticaEntrega() {
-        return politicaEntrega;
-    }
-    
-    // Métodos para agregar elementos
-    public void agregarProducto(Producto producto) {
-        productos.add(producto);
-    }
-    
-    public void agregarCertificacion(Certificacion certificacion) {
-        certificaciones.add(certificacion);
-    }
-    
-    public void agregarEvaluacion(Evaluacion evaluacion) {
-        evaluaciones.add(evaluacion);
-    }
-    
-    // PoliticaEntrega inner class
+    public String getId() { return id; }
+    public String getNombre() { return nombre; }
+    public String getContacto() { return contacto; }
+    public List<Certificacion> getCertificaciones() { return certificaciones; }
+    public List<Evaluacion> getEvaluaciones() { return evaluaciones; }
+    public PoliticaEntrega getPoliticaEntrega() { return politicaEntrega; }
+
+    // Clase interna PoliticaEntrega
     public static class PoliticaEntrega {
-        private int tiempoEntrega; // en días
+        private int tiempoMaximo;
         private double costoEnvio;
-        
-        public PoliticaEntrega(int tiempoEntrega, double costoEnvio) {
-            this.tiempoEntrega = tiempoEntrega;
+        private boolean requiereSeguro;
+        private List<String> zonasCobertura;
+
+        public PoliticaEntrega(int tiempoMaximo, double costoEnvio, boolean requiereSeguro, List<String> zonasCobertura) {
+            this.tiempoMaximo = tiempoMaximo;
             this.costoEnvio = costoEnvio;
+            this.requiereSeguro = requiereSeguro;
+            this.zonasCobertura = zonasCobertura;
         }
-        
-        public int getTiempoEntrega() {
-            return tiempoEntrega;
-        }
-        
-        public double getCostoEnvio() {
-            return costoEnvio;
-        }
-        
-        @Override
-        public String toString() {
-            return "Tiempo de entrega: " + tiempoEntrega + " días, Costo de envío: $" + costoEnvio;
-        }
+
+        // Getters
+        public int getTiempoMaximo() { return tiempoMaximo; }
+        public double getCostoEnvio() { return costoEnvio; }
+        public boolean isRequiereSeguro() { return requiereSeguro; }
+        public List<String> getZonasCobertura() { return zonasCobertura; }
     }
-    
-    // Builder class
-    public static class Builder {
-        private Proveedor proveedor;
-        
-        public Builder() {
-            proveedor = new Proveedor();
-        }
-        
-        public Builder conIdentificacion(String id, String nombre) {
-            proveedor.id = id;
-            proveedor.nombre = nombre;
+
+    // Clase Builder
+    public static class ProveedorBuilder {
+        private String id;
+        private String nombre;
+        private String contacto;
+        private List<Certificacion> certificaciones = new ArrayList<>();
+        private List<Evaluacion> evaluaciones = new ArrayList<>();
+        private PoliticaEntrega politicaEntrega;
+
+        public ProveedorBuilder setId(String id) {
+            this.id = id;
             return this;
         }
-        
-        public Builder conPoliticaEntrega(int tiempoEntrega, double costoEnvio) {
-            proveedor.politicaEntrega = new PoliticaEntrega(tiempoEntrega, costoEnvio);
+
+        public ProveedorBuilder setNombre(String nombre) {
+            this.nombre = nombre;
             return this;
         }
-        
-        public Builder agregarProducto(Producto producto) {
-            proveedor.productos.add(producto);
+
+        public ProveedorBuilder setContacto(String contacto) {
+            this.contacto = contacto;
             return this;
         }
-        
-        public Builder agregarCertificacion(Certificacion certificacion) {
-            proveedor.certificaciones.add(certificacion);
+
+        public ProveedorBuilder addCertificacion(Certificacion certificacion) {
+            this.certificaciones.add(certificacion);
             return this;
         }
-        
-        public Builder agregarEvaluacion(Evaluacion evaluacion) {
-            proveedor.evaluaciones.add(evaluacion);
+
+        public ProveedorBuilder addEvaluacion(Evaluacion evaluacion) {
+            this.evaluaciones.add(evaluacion);
             return this;
         }
-        
+
+        public ProveedorBuilder setPoliticaEntrega(PoliticaEntrega politicaEntrega) {
+            this.politicaEntrega = politicaEntrega;
+            return this;
+        }
+
         public Proveedor build() {
-            return proveedor;
+            return new Proveedor(id, nombre, contacto, certificaciones, evaluaciones, politicaEntrega);
         }
     }
 }
-
