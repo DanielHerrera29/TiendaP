@@ -1,17 +1,23 @@
 package co.edu.poli.Ejercicio.controller;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
+import co.edu.poli.Ejercicio.model.Certificacion;
+import co.edu.poli.Ejercicio.model.Evaluacion;
 import co.edu.poli.Ejercicio.model.Producto;
 import co.edu.poli.Ejercicio.model.ProductoAlimento;
 import co.edu.poli.Ejercicio.model.ProductoElectronico;
+import co.edu.poli.Ejercicio.model.Proveedor;
 import co.edu.poli.Ejercicio.services.DAO;
 import co.edu.poli.Ejercicio.services.ProductoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -48,6 +54,9 @@ public class ProductoController {
     private TableColumn<Producto, String> colCaracteristica;
   
     private final DAO<Producto> productoDAO = new ProductoDAO();
+    
+    @FXML
+    private Button btnBuilder;
 
     @FXML
     private void initialize() {
@@ -217,6 +226,29 @@ public class ProductoController {
             mostrarAlerta("Error", "Seleccione un producto para clonar.");
         }
     }
+   
+    
+    @FXML
+    private void handleBuilder() {
+        Proveedor proveedor = new Proveedor.ProveedorBuilder()
+                .setId("PROV123")
+                .setNombre("Proveedor de Ejemplo")
+                .setContacto("contacto@proveedor.com")
+                .addCertificacion(new Certificacion("CERT456", "ISO 9001", LocalDate.of(2022, 1, 1), LocalDate.of(2024, 1, 1)))
+                .addEvaluacion(new Evaluacion("EVAL789", LocalDate.now(), 4.5, "Buen proveedor"))
+                .setPoliticaEntrega(new Proveedor.PoliticaEntrega(7, 10.0, true, Arrays.asList("Zona A", "Zona B")))
+                .build();
 
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Proveedor Creado");
+        alert.setHeaderText("Se ha creado un proveedor usando el patrón Builder");
+        alert.setContentText("Nombre: " + proveedor.getNombre() +
+                             "\nContacto: " + proveedor.getContacto() +
+                             "\nCertificación: " + proveedor.getCertificaciones().get(0).getNombre() +
+                             "\nEvaluación: " + proveedor.getEvaluaciones().get(0).getComentarios() +
+                             "\nPolítica de Entrega: " + proveedor.getPoliticaEntrega().getZonasCobertura());
+
+        alert.showAndWait();
+    }
 
 }
