@@ -107,7 +107,7 @@ public class ClienteController {
 
 	    private void abrirPantallaPrincipal() {
 	        try {
-	            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/poli/Ejercicio/view/Productos.fxml"));
+	        	FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/poli/Ejercicio/view/Productos.fxml"));
 	            Parent root = loader.load();
 	            Stage stage = new Stage();
 	            stage.setScene(new Scene(root));
