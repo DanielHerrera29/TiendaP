@@ -7,6 +7,8 @@ package co.edu.poli.Ejercicio.model;
 	        super(nombre, Id);
 	    }
 
+	    
+	    
 	    @Override
 	    public void mostrar() {
 	        System.out.printf("Empleado: " + this.getNombre(),this.getId());
