@@ -2,7 +2,11 @@ package co.edu.poli.Ejercicio.controller;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
+import co.edu.poli.Ejercicio.model.Componente;
+import co.edu.poli.Ejercicio.model.Departamento;
+import co.edu.poli.Ejercicio.model.Empleado;
 import co.edu.poli.Ejercicio.model.Producto;
 import co.edu.poli.Ejercicio.model.ProductoAlimento;
 import co.edu.poli.Ejercicio.model.ProductoElectronico;
@@ -13,9 +17,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ProductoController {
@@ -217,6 +223,4 @@ public class ProductoController {
             mostrarAlerta("Error", "Seleccione un producto para clonar.");
         }
     }
-
-
-}
+   }
