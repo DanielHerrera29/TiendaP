@@ -4,6 +4,9 @@ public interface Componente {
 	    void iniciarRegistroTiempo();
 	    ppp
 	    
+	    
+	    
+	    
 	    void finalizarRegistroTiempo();  
 	    
 	    long obtenerTiempoTranscurrido();  
