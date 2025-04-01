@@ -38,8 +38,6 @@
         <Button fx:id="btnActualizar" onAction="#handleActualizar" text="Actualizar" />
         <Button fx:id="btnEliminar" onAction="#handleEliminar" text="Eliminar" />
         <Button fx:id="btnClonar" onAction="#handleClonar" text="Clonar" />
-        <Button fx:id="btnBuilder" onAction="#handleBuilder" text="Builder" />
-
     </HBox>
         
     <TableView fx:id="tblProductos">
