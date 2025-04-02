@@ -14,6 +14,7 @@ public class App extends Application {
 
     private static Scene scene;
 
+    
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/co/edu/poli/Ejercicio/view/Login.fxml"));
