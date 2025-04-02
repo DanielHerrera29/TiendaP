@@ -22,6 +22,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setTitle("Ejercicio");
         stage.show();
+        
     }
 
     public static void setRoot(String fxml) throws IOException {

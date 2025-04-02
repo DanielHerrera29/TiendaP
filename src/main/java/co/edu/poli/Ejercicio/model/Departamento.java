@@ -1,9 +1,10 @@
 package co.edu.poli.Ejercicio.model;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Departamento extends Componente {
-
+    
     private List<Componente> componentes;
 
     public Departamento(String nombre) {
@@ -17,13 +18,25 @@ public class Departamento extends Componente {
 
     @Override
     public void mostrar() {
-        System.out.println("Departamento: " + nombre);
+        System.out.println("Departamento: " + getNombre()); // ✅ Usar el método heredado correctamente
         for (Componente c : componentes) {
             c.mostrar();
         }
     }
 
-    public List<Componente> getComponentes() {
+    public void mostrarEstructura(String prefijo) {
+        System.out.println(prefijo + "- " + getNombre()); // ✅ Se usa getNombre() correctamente
+        for (Componente componente : this.getComponente()) {
+            if (componente instanceof Departamento) {
+                ((Departamento) componente).mostrarEstructura(prefijo + "  ");
+            } else if (componente instanceof EmpleadoHoja) {
+                System.out.println(prefijo + "  - " + componente.getNombre());
+            }
+        }
+    }
+
+    @Override
+    public List<Componente> getComponente() {
         return componentes;
     }
 }

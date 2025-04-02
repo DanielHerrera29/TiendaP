@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.Ejercicio.controller.ClienteController" prefWidth="600" prefHeight="700">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.Ejercicio.controller.ClienteController" prefWidth="600" prefHeight="500">
 
     <!-- Título -->
     <Label layoutX="220.0" layoutY="30.0" text="Inicio sesión">
@@ -23,20 +23,12 @@
     <Button layoutX="180.0" layoutY="220.0" prefWidth="120.0" text="Iniciar Sesión" onAction="#handleLogin"/>
     <Button layoutX="310.0" layoutY="220.0" prefWidth="120.0" text="Editar Cliente" onAction="#handleEditarCliente"/>
     <Button layoutX="440.0" layoutY="220.0" prefWidth="120.0" text="Borrar Cliente" onAction="#handleBorrarCliente"/>
-
-    <!-- Título Composite -->
-    <Label layoutX="170.0" layoutY="300.0" text="Composite: Departamento y Empleados" style="-fx-font-weight: bold;">
-        <font>
-            <Font size="18.0"/>
-        </font>
-    </Label>
-
-    <!-- Botones del Composite ABAJO -->
-    <Button fx:id="btnCrearComposite" layoutX="100" layoutY="340" text="Crear Composite" onAction="#crearComposite"/>
-    <Button fx:id="btnAgregarEmpleado" layoutX="240" layoutY="340" text="Agregar Empleado" onAction="#agregarEmpleado"/>
-    <Button fx:id="btnAgregarDepartamento" layoutX="380" layoutY="340" text="Agregar Departamento" onAction="#agregarDepartamento"/>
-
-    <!-- Lista -->
-    <ListView fx:id="listComponentes" layoutX="50.0" layoutY="400.0" prefWidth="500.0" prefHeight="250.0"/>
+	
+    
+    <Button fx:id="btnCrearComposite" layoutX="250" layoutY="430" text="Crear Composite" onAction="#crearComposite" />
+    <Button layoutX="70" layoutY="470.0"  fx:id="btnAgregarEmpleado" text="Agregar Empleado" onAction="#agregarEmpleado" />
+	<Button layoutX="230" layoutY="470.0"  fx:id="btnAgregarDepartamento" text="Agregar Departamento" onAction="#agregarDepartamento" />
+    <Button layoutX="400" layoutY="470.0"  fx:id="btnMostrarDepartamento" text="Mostrar Estructura" onAction="#mostrarEstructura"/>
+        
 
 </AnchorPane>
