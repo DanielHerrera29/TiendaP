@@ -1,30 +1,22 @@
 package co.edu.poli.Ejercicio.model;
 
+import java.util.Date;
+
 public class Evaluacion {
+    private String id;
+    private Date fecha;
     private double puntuacion;
     private String comentarios;
-    // Constructor, getters, setters
-    public Evaluacion(double puntuacion, String comentarios) {
+
+    public Evaluacion(String id, Date fecha, double puntuacion, String comentarios) {
+        this.id = id;
+        this.fecha = fecha;
         this.puntuacion = puntuacion;
         this.comentarios = comentarios;
     }
-    public double getPuntuacion() {
-        return puntuacion;
-    }
-    public void setPuntuacion(double puntuacion) {
-        this.puntuacion = puntuacion;
-    }
-    public String getComentarios() {
-        return comentarios;
-    }
-    public void setComentarios(String comentarios) {
-        this.comentarios = comentarios;
-    }
-    @Override
-    public String toString() {
-        return "Evaluacion{" +
-                "puntuacion=" + puntuacion +
-                ", comentarios='" + comentarios + '\'' +
-                '}';
-    }
+
+    public String getId() { return id; }
+    public Date getFecha() { return fecha; }
+    public double getPuntuacion() { return puntuacion; }
+    public String getComentarios() { return comentarios; }
 }
