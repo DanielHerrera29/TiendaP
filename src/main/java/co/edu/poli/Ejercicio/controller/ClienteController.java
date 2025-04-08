@@ -5,7 +5,8 @@ import java.util.Scanner;
 
 import co.edu.poli.Ejercicio.model.*;
 import co.edu.poli.Ejercicio.services.ClienteDAO;
-
+import java.util.List;
+import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,54 +66,59 @@ public class ClienteController {
 
     @FXML
     private void aplicarDecoratorPorConsola() {
-        new Thread(() -> {
-            Scanner scanner = new Scanner(System.in);
+        Platform.runLater(() -> {
+            List<String> opciones = List.of("VIP", "Descuento", "Envío Gratis", "Puntos");
+            ChoiceDialog<String> dialog = new ChoiceDialog<>("VIP", opciones);
+            dialog.setTitle("Seleccionar Decorador");
+            dialog.setHeaderText("Aplicar Decorador al Carrito");
+            dialog.setContentText("Elige un decorador:");
 
-            System.out.println("Seleccione un decorador:");
-            System.out.println("1. VIP");
-            System.out.println("2. Descuento (Ingrese el porcentaje después)");
-            System.out.println("3. Envío Gratis");
-            System.out.println("4. Puntos");
+            dialog.showAndWait().ifPresent(seleccion -> {
 
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); // limpiar buffer
+                switch (seleccion) {
+                    case "VIP":
+                        carrito = new VIP(carrito);
+                        mostrarAlerta(Alert.AlertType.INFORMATION, "VIP Aplicado", "Total: $" + carrito.obtenerTotal());
+                        actualizarVista();
+                        break;
 
-            CarritoCompra nuevoCarrito = carrito; // partimos del carrito actual
+                    case "Descuento":
+                        TextInputDialog inputDialog = new TextInputDialog("0.2");
+                        inputDialog.setTitle("Porcentaje de Descuento");
+                        inputDialog.setHeaderText("Aplicar Descuento");
+                        inputDialog.setContentText("Ingrese el porcentaje (Ej: 0.2 para 20%):");
 
-            switch (opcion) {
-                case 1:
-                    nuevoCarrito = new VIP(nuevoCarrito);
-                    break;
-                case 2:
-                    System.out.print("Ingrese el porcentaje de descuento (por ejemplo, 0.2 para 20%): ");
-                    try {
-                        double porcentaje = Double.parseDouble(scanner.nextLine());
-                        nuevoCarrito = new Descuento(nuevoCarrito, porcentaje);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Porcentaje inválido. No se aplicó el descuento.");
-                    }
-                    break;
-                case 3:
-                    nuevoCarrito = new EnvioGratis(nuevoCarrito);
-                    break;
-                case 4:
-                    nuevoCarrito = new Puntos(nuevoCarrito, opcion);
-                    break;
-                default:
-                    System.out.println("Opción inválida");
-                    return;
-            }
+                        inputDialog.showAndWait().ifPresent(valor -> {
+                            try {
+                                double porcentaje = Double.parseDouble(valor);
+                                carrito = new Descuento(carrito, porcentaje);
+                                mostrarAlerta(Alert.AlertType.INFORMATION, "Descuento Aplicado", "Se aplicó un descuento de " + (porcentaje * 100) + "%");
+                                actualizarVista();
+                            } catch (NumberFormatException e) {
+                                mostrarAlerta(Alert.AlertType.ERROR, "Error", "Porcentaje inválido.");
+                            }
+                        });
+                        break;
 
-            carrito = nuevoCarrito;
+                    case "Envío Gratis":
+                        carrito = new EnvioGratis(carrito);
+                        mostrarAlerta(Alert.AlertType.INFORMATION, "Envío Gratis", "Total: $" + carrito.obtenerTotal());
+                        actualizarVista();
+                        break;
 
-            System.out.println("Total del carrito con decoradores: $" + carrito.obtenerTotal());
-            System.out.println("Descripción: " + obtenerDescripcion1(carrito));
+                    case "Puntos":
+                        carrito = new Puntos(carrito, 4); // se usa 4 como referencia
+                        mostrarAlerta(Alert.AlertType.INFORMATION, "Puntos Aplicado", "Total: $" + carrito.obtenerTotal());
+                        actualizarVista();
+                        break;
 
-            // Actualizar la interfaz (labelResultado) en el hilo de JavaFX
-            Platform.runLater(() -> actualizarVista());
-
-        }).start();
+                    default:
+                        mostrarAlerta(Alert.AlertType.WARNING, "Opción inválida", "No se aplicó ningún decorador.");
+                }
+            });
+        });
     }
+
     @FXML
     private void aplicarDecorator() {
         CarritoCompra carrito = new CarritoBase(100.0); // puedes hacer que este sea un atributo si necesitas persistencia
@@ -136,6 +142,22 @@ public class ClienteController {
     // =============================
     // FUNCIONES CLIENTE (CRUD)
     // =============================
+    @FXML
+    private void handleLogin() {
+        String id = txtId.getText();
+        String nombre = txtNombre.getText();
+        try {
+            ClienteDAO clienteDAO = new ClienteDAO(); 
+            if (clienteDAO.validarCredenciales(id, nombre)) {
+                mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Inicio de sesión correcto.");
+                abrirPantallaPrincipal();
+            } else {
+                mostrarAlerta(Alert.AlertType.ERROR, "Error", "Credenciales incorrectas.");
+            }
+        } catch (SQLException e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error", "Error al validar credenciales: " + e.getMessage());
+        }
+    }
 
     @FXML
     private void handleInsertarCliente() {
