@@ -223,10 +223,10 @@ public class ProductoController {
         Producto seleccionado = tblProductos.getSelectionModel().getSelectedItem();
         if (seleccionado != null) {
             try {
-                Producto clon = seleccionado.clone(); // Se crea el clon con nuevo ID
+                Producto clon = seleccionado.clone(); 
                 productoDAO.insertar(clon);
                 mostrarAlerta("Clonación Exitosa", "El producto ha sido clonado correctamente con ID: " + clon.getId());
-                cargarProductos(); // Recargar la tabla para reflejar el cambio
+                cargarProductos();
             } catch (Exception e) {
                 mostrarAlerta("Error", "No se pudo clonar el producto: " + e.getMessage());
             }
@@ -239,7 +239,6 @@ private void handleBuilder() {
     Proveedor proveedor = new Proveedor.ProveedorBuilder()
             .setId("PROV123")
             .setNombre("Proveedor de Ejemplo")
-            .setContacto("contacto@proveedor.com")
             .setCertificaciones(Arrays.asList(
                     new Certificacion("CERT456", "ISO 9001",
                             java.sql.Date.valueOf(LocalDate.of(2022, 1, 1)),

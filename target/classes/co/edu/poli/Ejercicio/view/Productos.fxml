@@ -45,10 +45,11 @@
         
     <TableView fx:id="tblProductos">
         <columns>
-            <TableColumn fx:id="colId" text="ID" />
-            <TableColumn fx:id="colDescripcion" text="Descripción" />
-            <TableColumn fx:id="colPrecio" text="Precio" />
-            <TableColumn fx:id="colCaracteristica" text="Característica" />
+            <TableColumn fx:id="colId" text="ID" prefWidth="100"/>
+            <TableColumn fx:id="colDescripcion" text="Descripción" prefWidth="150"/>
+            <TableColumn fx:id="colPrecio" text="Precio" prefWidth="100"/>
+            <TableColumn fx:id="colCaracteristica" text="Característica" prefWidth="150"/>
         </columns>
     </TableView>
-</VBox>
+
+</AnchorPane>
