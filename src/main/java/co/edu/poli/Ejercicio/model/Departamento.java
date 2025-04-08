@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Departamento extends Componente {
-    
+
     private List<Componente> componentes;
 
     public Departamento(String nombre) {
@@ -18,15 +18,15 @@ public class Departamento extends Componente {
 
     @Override
     public void mostrar() {
-        System.out.println("Departamento: " + getNombre()); // ✅ Usar el método heredado correctamente
+        System.out.println("Departamento: " + getNombre());
         for (Componente c : componentes) {
             c.mostrar();
         }
     }
 
     public void mostrarEstructura(String prefijo) {
-        System.out.println(prefijo + "- " + getNombre()); // ✅ Se usa getNombre() correctamente
-        for (Componente componente : this.getComponente()) {
+        System.out.println(prefijo + "- " + getNombre());
+        for (Componente componente : componentes) {
             if (componente instanceof Departamento) {
                 ((Departamento) componente).mostrarEstructura(prefijo + "  ");
             } else if (componente instanceof EmpleadoHoja) {
@@ -40,3 +40,4 @@ public class Departamento extends Componente {
         return componentes;
     }
 }
+

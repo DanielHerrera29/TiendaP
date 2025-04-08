@@ -4,31 +4,28 @@ import java.util.List;
 
 public abstract class Componente {
     protected String nombre;
-    
+
     public Componente(String nombre) {
         this.nombre = nombre;
-        
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Componente> getComponente() {
+        // Método base, puede ser sobreescrito en clases como Departamento
+        return null;
+    }
+
+    public abstract void mostrar();
 
     @Override
-	public String toString() {
-		return "Componente [nombre=" + nombre ;
-	}
-
-
-	public String getNombre() {
-		return nombre;
-	}
-
-
-	public void setnombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public List<Componente> getComponente() {
-	    return this.getComponente();
-	}
-
-
-	public abstract void mostrar();
+    public String toString() {
+        return "Componente [nombre=" + nombre + "]";
+    }
 }
