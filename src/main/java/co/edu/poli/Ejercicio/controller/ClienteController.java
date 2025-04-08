@@ -1,10 +1,12 @@
 package co.edu.poli.Ejercicio.controller;
 
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import co.edu.poli.Ejercicio.model.*;
 import co.edu.poli.Ejercicio.services.ClienteDAO;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,26 +16,127 @@ import javafx.stage.Stage;
 
 public class ClienteController {
 
-	@FXML private TextField txtId;
-	@FXML private TextField txtNombre;
-	@FXML private ListView<String> listComponentes; 
-	@FXML private Button btnCrearComposite;
-	@FXML private Button btnAgregarEmpleado;
-	@FXML private Button btnAgregarDepartamento;
-	@FXML private TextArea txtEstructura;
+    @FXML private TextField txtId;
+    @FXML private TextField txtNombre;
+    @FXML private ListView<String> listComponentes; 
+    @FXML private Button btnCrearComposite;
+    @FXML private Button btnAgregarEmpleado;
+    @FXML private Button btnAgregarDepartamento;
+    @FXML private TextArea txtEstructura;
+    @FXML private Button btnElegirDecorator;
+    @FXML private Label lblResultado;
+    @FXML
+    private Label labelTotal;
 
+    @FXML
+    private Label labelDescripcion;
+
+
+    private CarritoCompra carrito;
     private Departamento departamentoRaiz;
 
     @FXML
     public void initialize() {
+        carrito = new CarritoBase(100.0); // Total base del carrito
+        actualizarVista();
         departamentoRaiz = null;
     }
 
+    private void actualizarVista() {
+        if (lblResultado != null && carrito != null) {
+            String descripcion = obtenerDescripcion1(carrito);
+            lblResultado.setText("Total: $" + carrito.obtenerTotal() + "\n" + descripcion);
+        }
+    }
+
+    private String obtenerDescripcion1(CarritoCompra carrito) {
+        if (carrito instanceof DecoratorCarrito decorator) {
+            return obtenerDescripcion1(decorator.getCarrito()) + " + " + decorator.obtenerDescripcion();
+        }
+        return "Carrito Base";
+    }
+    public CarritoCompra getCarrito() {
+        return carrito;
+    }
+
+    // =============================
+    // FUNCIONES DECORATOR
+    // =============================
+
+    @FXML
+    private void aplicarDecoratorPorConsola() {
+        new Thread(() -> {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Seleccione un decorador:");
+            System.out.println("1. VIP");
+            System.out.println("2. Descuento (Ingrese el porcentaje después)");
+            System.out.println("3. Envío Gratis");
+            System.out.println("4. Puntos");
+
+            int opcion = scanner.nextInt();
+            scanner.nextLine(); // limpiar buffer
+
+            CarritoCompra nuevoCarrito = carrito; // partimos del carrito actual
+
+            switch (opcion) {
+                case 1:
+                    nuevoCarrito = new VIP(nuevoCarrito);
+                    break;
+                case 2:
+                    System.out.print("Ingrese el porcentaje de descuento (por ejemplo, 0.2 para 20%): ");
+                    try {
+                        double porcentaje = Double.parseDouble(scanner.nextLine());
+                        nuevoCarrito = new Descuento(nuevoCarrito, porcentaje);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Porcentaje inválido. No se aplicó el descuento.");
+                    }
+                    break;
+                case 3:
+                    nuevoCarrito = new EnvioGratis(nuevoCarrito);
+                    break;
+                case 4:
+                    nuevoCarrito = new Puntos(nuevoCarrito, opcion);
+                    break;
+                default:
+                    System.out.println("Opción inválida");
+                    return;
+            }
+
+            carrito = nuevoCarrito;
+
+            System.out.println("Total del carrito con decoradores: $" + carrito.obtenerTotal());
+            System.out.println("Descripción: " + obtenerDescripcion1(carrito));
+
+            // Actualizar la interfaz (labelResultado) en el hilo de JavaFX
+            Platform.runLater(() -> actualizarVista());
+
+        }).start();
+    }
+    @FXML
+    private void aplicarDecorator() {
+        CarritoCompra carrito = new CarritoBase(100.0); // puedes hacer que este sea un atributo si necesitas persistencia
+        carrito = new VIP(carrito);
+        carrito = new Descuento(carrito, 0);
+        carrito = new EnvioGratis(carrito);
+
+        System.out.println("Total actualizado: $" + carrito.obtenerTotal());
+        System.out.println("Descripción: " + obtenerDescripcion1(carrito));
+        
+      //  labelTotal.setText("Total: $" + carrito.obtenerTotal());
+      //  labelDescripcion.setText(obtenerDescripcion1(carrito));
+    }
+
+    private String obtenerDescripcion(CarritoCompra carrito) {
+        if (carrito instanceof DecoratorCarrito decorator) {
+            return obtenerDescripcion1(decorator.getCarrito()) + " + " + decorator.obtenerDescripcion();
+        }
+        return "Carrito Base";
+    }
     // =============================
     // FUNCIONES CLIENTE (CRUD)
     // =============================
 
- 
     @FXML
     private void handleInsertarCliente() {
         String id = txtId.getText();

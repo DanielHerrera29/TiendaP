@@ -8,7 +8,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.Ejercicio.controller.ClienteController" prefWidth="600" prefHeight="700">
 
     <!-- Título -->
-    <Label layoutX="220.0" layoutY="30.0" text="Tienda">
+    <Label layoutX="250.0" layoutY="30.0" text="Tienda">
         <font>
             <Font size="24.0"/>
         </font>
@@ -22,7 +22,8 @@
     <Button layoutX="70.0" layoutY="220.0" prefWidth="120.0" text="Insertar Cliente" onAction="#handleInsertarCliente"/>
     <Button layoutX="240.0" layoutY="220.0" prefWidth="120.0" text="Editar Cliente" onAction="#handleEditarCliente"/>
     <Button layoutX="410.0" layoutY="220.0" prefWidth="120.0" text="Borrar Cliente" onAction="#handleBorrarCliente"/>
-
+	<Button layoutX="240.0" layoutY="320.0" prefWidth="120.0" fx:id="btnAplicarDecorator" onAction="#aplicarDecoratorPorConsola" text="Aplicar Decorador"/>
+	
     
 	<!-- Área de texto para mostrar la estructura del Composite -->
 	<TextArea fx:id="txtEstructura" layoutX="90.0" layoutY="600.0" prefWidth="200.0" prefHeight="50.0" wrapText="true" />
