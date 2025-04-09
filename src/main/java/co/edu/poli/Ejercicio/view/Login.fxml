@@ -22,6 +22,8 @@
     <Button layoutX="70.0" layoutY="220.0" prefWidth="120.0" text="Insertar Cliente" onAction="#handleInsertarCliente"/>
     <Button layoutX="240.0" layoutY="220.0" prefWidth="120.0" text="Editar Cliente" onAction="#handleEditarCliente"/>
     <Button layoutX="410.0" layoutY="220.0" prefWidth="120.0" text="Borrar Cliente" onAction="#handleBorrarCliente"/>
+	<Button layoutX="610.0" layoutY="220.0" prefWidth="120.0" text="Iniciar Sesión" onAction="#handleLogin"/>
+	
 	<Button layoutX="240.0" layoutY="320.0" prefWidth="120.0" fx:id="btnAplicarDecorator" onAction="#aplicarDecoratorPorConsola" text="Aplicar Decorador"/>
 	
     
