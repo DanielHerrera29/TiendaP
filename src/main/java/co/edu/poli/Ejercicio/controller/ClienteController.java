@@ -127,12 +127,6 @@ public class ClienteController {
       //  labelDescripcion.setText(obtenerDescripcion1(carrito));
     }
 
-    private String obtenerDescripcion(CarritoCompra carrito) {
-        if (carrito instanceof DecoratorCarrito decorator) {
-            return obtenerDescripcion1(decorator.getCarrito()) + " + " + decorator.obtenerDescripcion();
-        }
-        return "Carrito Base";
-    }
     // =============================
     // FUNCIONES CLIENTE (CRUD)
     // =============================
