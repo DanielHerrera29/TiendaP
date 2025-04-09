@@ -110,7 +110,7 @@ public class ClienteController {
                         break;
 
                     case "Puntos":
-                        carrito = new Puntos(carrito, 4); // se usa 4 como referencia
+                        carrito = new Puntos(carrito, 4); 
                         mostrarAlerta(Alert.AlertType.INFORMATION, "Puntos Aplicado", "Total: $" + carrito.obtenerTotal());
                         actualizarVista();
                         break;

@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
 		<attributes>
 			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" path="target/generated-sources/annotations">
-		<attributes>
-			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="ignore_optional_problems" value="true"/>
-			<attribute name="m2e-apt" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
@@ -20,7 +13,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="target/classes" path="src/main/resources">
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="optional" value="true"/>
@@ -32,103 +25,21 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="c:/mysql-connector-j-9.2.0.jar"/>
-	<classpathentry kind="lib" path="c:/Users/angui/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13.jar">
+	<classpathentry kind="lib" path="C:/Users/User/eclipse-workspace/mysql-connector-j-9.2.0/mysql-connector-j-9.2.0.jar">
 		<attributes>
-			<attribute name="maven.artifactId" value="javafx-controls"/>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.scope" value="compile"/>
-			<attribute name="maven.version" value="13"/>
-			<attribute name="maven.groupId" value="org.openjfx"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="c:/Users/angui/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13-win.jar">
-		<attributes>
-			<attribute name="maven.artifactId" value="javafx-controls"/>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.scope" value="compile"/>
-			<attribute name="maven.version" value="13"/>
-			<attribute name="maven.classifier" value="win"/>
 			<attribute name="module" value="true"/>
-			<attribute name="maven.groupId" value="org.openjfx"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="c:/Users/angui/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13.jar">
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
 		<attributes>
-			<attribute name="maven.artifactId" value="javafx-graphics"/>
+			<attribute name="test" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.scope" value="compile"/>
-			<attribute name="maven.version" value="13"/>
-			<attribute name="maven.groupId" value="org.openjfx"/>
+			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="c:/Users/angui/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13-win.jar">
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
-			<attribute name="maven.artifactId" value="javafx-graphics"/>
 			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.scope" value="compile"/>
-			<attribute name="maven.version" value="13"/>
-			<attribute name="maven.classifier" value="win"/>
-			<attribute name="module" value="true"/>
-			<attribute name="maven.groupId" value="org.openjfx"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="c:/Users/angui/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13.jar">
-		<attributes>
-			<attribute name="maven.artifactId" value="javafx-base"/>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.scope" value="compile"/>
-			<attribute name="maven.version" value="13"/>
-			<attribute name="maven.groupId" value="org.openjfx"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="c:/Users/angui/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13-win.jar">
-		<attributes>
-			<attribute name="maven.artifactId" value="javafx-base"/>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.scope" value="compile"/>
-			<attribute name="maven.version" value="13"/>
-			<attribute name="maven.classifier" value="win"/>
-			<attribute name="module" value="true"/>
-			<attribute name="maven.groupId" value="org.openjfx"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="c:/Users/angui/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar">
-		<attributes>
-			<attribute name="maven.artifactId" value="mysql-connector-j"/>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.scope" value="compile"/>
-			<attribute name="maven.version" value="8.0.33"/>
-			<attribute name="maven.groupId" value="com.mysql"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="c:/Users/angui/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar">
-		<attributes>
-			<attribute name="maven.artifactId" value="protobuf-java"/>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.scope" value="compile"/>
-			<attribute name="maven.version" value="3.21.9"/>
-			<attribute name="maven.groupId" value="com.google.protobuf"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="c:/Users/angui/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13.jar">
-		<attributes>
-			<attribute name="maven.artifactId" value="javafx-fxml"/>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.scope" value="compile"/>
-			<attribute name="maven.version" value="13"/>
-			<attribute name="maven.groupId" value="org.openjfx"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="c:/Users/angui/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13-win.jar">
-		<attributes>
-			<attribute name="maven.artifactId" value="javafx-fxml"/>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.scope" value="compile"/>
-			<attribute name="maven.version" value="13"/>
-			<attribute name="maven.classifier" value="win"/>
-			<attribute name="module" value="true"/>
-			<attribute name="maven.groupId" value="org.openjfx"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>

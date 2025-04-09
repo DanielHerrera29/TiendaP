@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.Ejercicio.controller.ProductoController">
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.Ejercicio.controller.ProductoController">
     <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Consulta de Productos" />
     
     <HBox spacing="10">
@@ -48,5 +48,4 @@
             <TableColumn fx:id="colCaracteristica" text="Característica" prefWidth="150"/>
         </columns>
     </TableView>
-
-</AnchorPane>
+</VBox>
