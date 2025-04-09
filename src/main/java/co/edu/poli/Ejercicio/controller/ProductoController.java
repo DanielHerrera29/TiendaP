@@ -1,18 +1,13 @@
 package co.edu.poli.Ejercicio.controller;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import co.edu.poli.Ejercicio.services.PayPalAdapter;
 import co.edu.poli.Ejercicio.services.NequiAdapter;
 import co.edu.poli.Ejercicio.services.Pagos;
-import co.edu.poli.Ejercicio.model.Certificacion;
-import co.edu.poli.Ejercicio.model.Evaluacion;
 import co.edu.poli.Ejercicio.model.Producto;
 import co.edu.poli.Ejercicio.model.ProductoAlimento;
 import co.edu.poli.Ejercicio.model.ProductoElectronico;
-import co.edu.poli.Ejercicio.model.Proveedor;
 import co.edu.poli.Ejercicio.services.DAO;
 import co.edu.poli.Ejercicio.services.ProductoDAO;
 import javafx.collections.FXCollections;
@@ -248,40 +243,15 @@ public class ProductoController {
         Producto seleccionado = tblProductos.getSelectionModel().getSelectedItem();
         if (seleccionado != null) {
             try {
-                Producto clon = seleccionado.clone(); // Se crea el clon con nuevo ID
+                Producto clon = seleccionado.clone(); 
                 productoDAO.insertar(clon);
                 mostrarAlerta("Clonación Exitosa", "El producto ha sido clonado correctamente con ID: " + clon.getId());
-                cargarProductos(); // Recargar la tabla para reflejar el cambio
+                cargarProductos();
             } catch (Exception e) {
                 mostrarAlerta("Error", "No se pudo clonar el producto: " + e.getMessage());
             }
         } else {
             mostrarAlerta("Error", "Seleccione un producto para clonar.");
         }
-    }
-   
-    
-    @FXML
-    private void handleBuilder() {
-        Proveedor proveedor = new Proveedor.ProveedorBuilder()
-                .setId("PROV123")
-                .setNombre("Proveedor de Ejemplo")
-                .setContacto("contacto@proveedor.com")
-                .addCertificacion(new Certificacion("CERT456", "ISO 9001", LocalDate.of(2022, 1, 1), LocalDate.of(2024, 1, 1)))
-                .addEvaluacion(new Evaluacion("EVAL789", LocalDate.now(), 4.5, "Buen proveedor"))
-                .setPoliticaEntrega(new Proveedor.PoliticaEntrega(7, 10.0, true, Arrays.asList("Zona A", "Zona B")))
-                .build();
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Proveedor Creado");
-        alert.setHeaderText("Se ha creado un proveedor usando el patrón Builder");
-        alert.setContentText("Nombre: " + proveedor.getNombre() +
-                             "\nContacto: " + proveedor.getContacto() +
-                             "\nCertificación: " + proveedor.getCertificaciones().get(0).getNombre() +
-                             "\nEvaluación: " + proveedor.getEvaluaciones().get(0).getComentarios() +
-                             "\nPolítica de Entrega: " + proveedor.getPoliticaEntrega().getZonasCobertura());
-
-        alert.showAndWait();
-    }
-
+    }   
 }

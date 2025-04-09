@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.Ejercicio.controller.ProductoController">
+
     <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Consulta de Productos" />
     
     <HBox spacing="10">
@@ -38,17 +39,15 @@
         <Button fx:id="btnActualizar" onAction="#handleActualizar" text="Actualizar" />
         <Button fx:id="btnEliminar" onAction="#handleEliminar" text="Eliminar" />
         <Button fx:id="btnClonar" onAction="#handleClonar" text="Clonar" />
-        <Button fx:id="btnBuilder" onAction="#handleBuilder" text="Builder" />
         <Button fx:id="btnPagar" onAction="#handlePagar" text="Pagar" />
-
     </HBox>
         
     <TableView fx:id="tblProductos">
         <columns>
-            <TableColumn fx:id="colId" text="ID" />
-            <TableColumn fx:id="colDescripcion" text="Descripción" />
-            <TableColumn fx:id="colPrecio" text="Precio" />
-            <TableColumn fx:id="colCaracteristica" text="Característica" />
+            <TableColumn fx:id="colId" text="ID" prefWidth="100"/>
+            <TableColumn fx:id="colDescripcion" text="Descripción" prefWidth="150"/>
+            <TableColumn fx:id="colPrecio" text="Precio" prefWidth="100"/>
+            <TableColumn fx:id="colCaracteristica" text="Característica" prefWidth="150"/>
         </columns>
     </TableView>
 </VBox>

@@ -1,24 +1,26 @@
 package co.edu.poli.Ejercicio.model;
 
-public class Empleado {
+public abstract class Empleado extends Componente {
 	
-	    private String id;
-	    private String nombre;
+	    
 
-	    public Empleado() {
-	    }
+	private String Id;
 
-	    public void Empelado(String id, String nombre) {
-	        this.id = id;
+	public Empleado(String nombre, String Id) {
+        super(nombre);
+    }
+
+	    public void Empelado(String Id, String nombre) {
+	        this.Id= Id;
 	        this.nombre = nombre;
 	    }
 
 	    public String getId() {
-	        return this.id;
+	        return this.Id;
 	    }
 
-	    public void setId(String id) {
-	        this.id = id;
+	    public void setId(String Id) {
+	        this.Id = Id;
 	    }
 
 	    public String getNombre() {
@@ -31,7 +33,7 @@ public class Empleado {
 
 	    @Override
 	    public String toString() {
-	        return "Cliente [id=" + this.id + ", nombre=" + this.nombre + "]";
+	        return "Cliente [id=" + this.Id + ", nombre=" + this.nombre + "]";
 	    }
 	}
 
