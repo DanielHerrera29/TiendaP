@@ -1,12 +1,15 @@
 package co.edu.poli.Ejercicio.controller;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import co.edu.poli.Ejercicio.model.*;
 import co.edu.poli.Ejercicio.services.ClienteDAO;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -372,5 +375,67 @@ public class ClienteController {
         } catch (Exception e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error", "No se pudo abrir la pantalla de productos: " + e.getMessage());
         }
+    }
+
+            @FXML
+private void handleBuilder() {
+    Proveedor proveedor = new Proveedor.ProveedorBuilder()
+            .setId("PROV123")
+            .setNombre("Proveedor de Ejemplo")
+            .setCertificaciones(Arrays.asList(
+                    new Certificacion("CERT456", "ISO 9001",
+                            java.sql.Date.valueOf(LocalDate.of(2022, 1, 1)),
+                            java.sql.Date.valueOf(LocalDate.of(2024, 1, 1)))
+            ))
+            .setEvaluaciones(Arrays.asList(
+                    new Evaluacion("EVAL789",
+                            java.sql.Date.valueOf(LocalDate.now()),
+                            4.5, "Buen proveedor")
+            ))
+            .setPoliticaEntrega(new PoliticaEntrega(7, 10.0, true, Arrays.asList("Zona A", "Zona B")))
+            .build();
+
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Proveedor Creado");
+    alert.setHeaderText("Se ha creado un proveedor usando el patrón Builder");
+    alert.setContentText("Nombre: " + proveedor.getNombre() +
+            "\nContacto: " + proveedor.getContacto() +
+            "\nCertificación: " + proveedor.getCertificaciones().get(0).getNombre() +
+            "\nEvaluación: " + proveedor.getEvaluaciones().get(0).getComentarios() +
+            "\nPolítica de Entrega: " + proveedor.getPoliticaEntrega().getZonasCobertura());
+
+    alert.showAndWait();
+}
+ @FXML
+    private void handleBridge() {
+        StringBuilder output = new StringBuilder();
+
+        // carga frágil
+        Envio envioNacional = new Nacional();
+        Mercancia cargaFragil = new CargaFragil(envioNacional, "Carga frágil", 10);
+        envioNacional.setMercancia(cargaFragil);
+        output.append(envioNacional.enviar()).append("\n");
+        output.append(cargaFragil.procesar()).append("\n");
+
+        // carga pesada
+        Envio envioInternacional = new Internacional();
+        Mercancia cargaPesada = new CargaPesada(envioInternacional, "Carga pesada", 100.0);
+        envioInternacional.setMercancia(cargaPesada);
+        output.append(envioInternacional.enviar()).append("\n");
+        output.append(cargaPesada.procesar()).append("\n");
+
+        // Carga express
+        Envio envioCargaExpress = new CargaExpress();
+        Mercancia cargaPesadaExpress = new CargaPesada(envioCargaExpress, "Carga express", 100.0);
+        envioCargaExpress.setMercancia(cargaPesadaExpress);
+        output.append(envioCargaExpress.enviar()).append("\n");
+        output.append(cargaPesadaExpress.procesar()).append("\n");
+
+        // Mostrar en ventana
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Envíos Bridge");
+        alert.setHeaderText("Se procesaron los siguientes envíos:");
+        alert.setContentText(output.toString());
+        alert.showAndWait();
     }
 }

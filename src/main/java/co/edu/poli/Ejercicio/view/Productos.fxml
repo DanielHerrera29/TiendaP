@@ -37,10 +37,7 @@
         <Button fx:id="btnInsertar" onAction="#handleInsertar" text="Insertar" />
         <Button fx:id="btnActualizar" onAction="#handleActualizar" text="Actualizar" />
         <Button fx:id="btnEliminar" onAction="#handleEliminar" text="Eliminar" />
-        <Button fx:id="btnClonar" onAction="#handleClonar" text="Clonar" />
-        <Button fx:id="btnBuilder" onAction="#handleBuilder" text="Builder" />
-        <Button fx:id="btnBridge" onAction="#handleBridge" text="Bridge" />
-        
+        <Button fx:id="btnClonar" onAction="#handleClonar" text="Clonar" /> 
     </HBox>
         
     <TableView fx:id="tblProductos">
