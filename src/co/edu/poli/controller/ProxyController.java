@@ -6,7 +6,12 @@ import javafx.collections.ObservableList;
 import co.edu.poli.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 public class ProxyController {
 
     @FXML
@@ -48,10 +53,24 @@ public class ProxyController {
         ObservableList<String> nivelesAcceso = FXCollections.observableArrayList("1", "2");
         nivelAccesoComboBox.setItems(nivelesAcceso);
     }
+    @FXML
+    public void abrirClienteFacade() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/poli/view/cliente_view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Cliente Facade");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     private void crearUsuario() {
-        // Obtener datos del formulario
         String nombre = nombreUsuarioTextField.getText();
         String idString = usuarioIdTextField.getText();
         String nivelString = nivelAccesoComboBox.getValue();
