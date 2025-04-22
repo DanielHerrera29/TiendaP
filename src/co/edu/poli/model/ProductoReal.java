@@ -1,14 +1,16 @@
 package co.edu.poli.model;
-import java.util.Map;
+
+import java.util.List;
 
 public class ProductoReal implements IProducto {
+
     private int id;
     private String nombre;
     private double precio;
     private String descripcion;
-    private Map<String, String> especificaciones;
+    private List<Especificacion> especificaciones;
 
-    public ProductoReal(int id, String nombre, double precio, String descripcion, Map<String, String> especificaciones) {
+    public ProductoReal(int id, String nombre, double precio, String descripcion, List<Especificacion> especificaciones) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -28,6 +30,10 @@ public class ProductoReal implements IProducto {
 
     @Override
     public String obtenerEspecificaciones(int usuarioId) {
-        return especificaciones.toString();
+        StringBuilder sb = new StringBuilder();
+        for (Especificacion e : especificaciones) {
+            sb.append(e.toString()).append("\n");
+        }
+        return sb.toString();
     }
 }

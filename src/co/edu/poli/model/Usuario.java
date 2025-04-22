@@ -15,7 +15,15 @@ public class Usuario {
         return id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public int obtenerNivelAcceso() {
         return nivelAcceso;
+    }
+
+    public void setNivelAcceso(int nivelAcceso) {
+        this.nivelAcceso = nivelAcceso;
     }
 }

@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 
-<BorderPane fx:controller="co.edu.poli.controller.ProxyController"
-            xmlns:fx="http://javafx.com/fxml" prefWidth="400" prefHeight="400">
-    
-    <center>
-        <VBox spacing="10" alignment="CENTER">
-            <Button text="Mostrar Detalles del Producto" onAction="#mostrarDetalles"/>
-            <Label fx:id="lblResultado" wrapText="true" />
-        </VBox>
-    </center>
-</BorderPane>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.controller.ProxyController" spacing="20" alignment="CENTER">
+   
+    <children>
+        <Label layoutX="217.0" layoutY="49.0" text="Gestión de Producto y Usuarios" />
+        <TextField layoutX="226.0" layoutY="83.0" promptText="Usuario" fx:id="nombreUsuarioTextField"/>
+        <TextField layoutX="226.0" layoutY="124.0" promptText="ID" fx:id="usuarioIdTextField" />
+        
+        <!-- ComboBox para seleccionar el nivel de acceso -->
+        <ComboBox fx:id="nivelAccesoComboBox" layoutX="225.0" layoutY="188.0" prefWidth="150.0" promptText="Selecciona el nivel de acceso" />
+
+        <Button layoutX="256.0" layoutY="237.0" mnemonicParsing="false" text="Crear Usuario" onAction="#crearUsuario" />
+        <Button layoutX="214.0" layoutY="279.0" mnemonicParsing="false" text="Mostrar Detalles del Producto" onAction="#mostrarDetalles"/>
+
+        <Label fx:id="detallesLabel" text=" " />
+        <Label fx:id="precioLabel" text=" " />
+        <Label fx:id="especificacionesLabel" text=" " />
+    </children>
+   
+</VBox>

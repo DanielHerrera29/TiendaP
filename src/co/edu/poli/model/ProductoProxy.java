@@ -1,46 +1,45 @@
 package co.edu.poli.model;
 
 public class ProductoProxy implements IProducto {
-    private ProductoReal productoReal;
-    private AutenticacionService autenticacionService;
-    private Usuario usuario;
-    private int nivelRequerido;
 
-    public ProductoProxy(ProductoReal productoReal, Usuario usuario, int nivelRequerido) {
+    private AutenticacionService autenticacionService;
+    private ProductoReal productoReal;
+    private Usuario usuario;
+
+    public ProductoProxy(ProductoReal productoReal, AutenticacionService autenticacionService) {
         this.productoReal = productoReal;
+        this.autenticacionService = autenticacionService;
+    }
+
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-        this.nivelRequerido = nivelRequerido;
-        this.autenticacionService = new AutenticacionService();
+    }
+
+    private boolean verificarAcceso(int nivelRequerido) {
+        return autenticacionService.verificarNivelAcceso(usuario, nivelRequerido);
     }
 
     @Override
     public String obtenerDetalles(int usuarioId) {
-        if (verificarAcceso()) {
+        if (verificarAcceso(1)) {
             return productoReal.obtenerDetalles(usuarioId);
-        } else {
-            return "Acceso denegado a los detalles del producto.";
         }
+        return "Acceso denegado a los detalles del producto.";
     }
 
     @Override
     public double obtenerPrecio(int usuarioId) {
-        if (verificarAcceso()) {
+        if (verificarAcceso(1)) {
             return productoReal.obtenerPrecio(usuarioId);
-        } else {
-            return -1;
         }
+        return 0.0;
     }
 
     @Override
     public String obtenerEspecificaciones(int usuarioId) {
-        if (verificarAcceso()) {
+        if (verificarAcceso(2)) {
             return productoReal.obtenerEspecificaciones(usuarioId);
-        } else {
-            return "Acceso denegado a las especificaciones del producto.";
         }
-    }
-
-    private boolean verificarAcceso() {
-        return autenticacionService.verificarNivelAcceso(usuario, nivelRequerido);
+        return "Acceso denegado a las especificaciones.";
     }
 }
