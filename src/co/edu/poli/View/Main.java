@@ -10,7 +10,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-        	Parent root = FXMLLoader.load(getClass().getResource("proxy_view.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/co/edu/poli/view/proxy_view.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Tienda - Patrón Proxy");

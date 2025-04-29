@@ -9,13 +9,19 @@ public class ProductoReal implements IProducto {
     private double precio;
     private String descripcion;
     private List<Especificacion> especificaciones;
+    private Proveedor proveedor; //Flyweight
 
-    public ProductoReal(int id, String nombre, double precio, String descripcion, List<Especificacion> especificaciones) {
+    public ProductoReal(int id, String nombre, double precio, String descripcion, List<Especificacion> especificaciones, Proveedor proveedor) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
         this.especificaciones = especificaciones;
+        this.proveedor = proveedor;
+    }
+    //Flyweight
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
     @Override
@@ -35,5 +41,9 @@ public class ProductoReal implements IProducto {
             sb.append(e.toString()).append("\n");
         }
         return sb.toString();
+    }
+    //patrón Flyweight
+    public String obtenerInformacionProveedor() {
+        return "Información del proveedor: " + proveedor.getNombre();
     }
 }

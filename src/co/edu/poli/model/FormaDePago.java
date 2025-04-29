@@ -19,4 +19,8 @@ public class FormaDePago {
         this.activa = true;
         System.out.println("Forma de pago activada.");
     }
+    public void bloquearFormaPago() {
+        this.activa = true;
+        System.out.println("Forma de pago bloqueado.");
+    }
 }

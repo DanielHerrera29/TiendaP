@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.controller.ProxyController" prefHeight="400.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/21.0.1">
-   
-    <children>
-        <Label layoutX="211.0" layoutY="49.0" text="Gestión de Producto y Usuarios" />
-        
-        <!-- Campos de texto con posicionamiento similar al cliente_view -->
-        <TextField layoutX="191.0" layoutY="113.0" promptText="Usuario" fx:id="nombreUsuarioTextField"/>
-        <TextField layoutX="191.0" layoutY="150.0" promptText="ID" fx:id="usuarioIdTextField" />
-        
-        <!-- ComboBox con dimensiones ajustadas -->
-        <ComboBox fx:id="nivelAccesoComboBox" layoutX="191.0" layoutY="188.0" prefWidth="150.0" promptText="Selecciona el nivel de acceso" />
+<AnchorPane prefHeight="520.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.controller.ProxyController">
+<children>
+    <Label layoutX="211.0" layoutY="49.0" text="Gestión de Producto y Usuarios" />
 
-        <!-- Botones con posiciones similares -->
-        <Button layoutX="222.0" layoutY="237.0" mnemonicParsing="false" text="Crear Usuario" onAction="#crearUsuario" />
-        <Button layoutX="222.0" layoutY="279.0" mnemonicParsing="false" text="Mostrar Detalles del Producto" onAction="#mostrarDetalles"/>
+    <TextField layoutX="191.0" layoutY="113.0" promptText="Usuario" fx:id="nombreUsuarioTextField"/>
+    <TextField layoutX="191.0" layoutY="150.0" promptText="ID" fx:id="usuarioIdTextField" />
 
-        <!-- Etiquetas para mostrar detalles -->
-        <Label fx:id="detallesLabel" layoutX="191.0" layoutY="320.0" text=" " />
-        <Label fx:id="precioLabel" layoutX="191.0" layoutY="350.0" text=" " />
-        <Label fx:id="especificacionesLabel" layoutX="191.0" layoutY="380.0" text=" " />
+    <ComboBox fx:id="nivelAccesoComboBox" layoutX="191.0" layoutY="188.0" prefWidth="150.0" promptText="Selecciona el nivel de acceso" />
 
-        <!-- Botón adicional para abrir ClienteFacade -->
-        <Button text="Abrir ClienteFacade" layoutX="222.0" layoutY="410.0" onAction="#abrirClienteFacade" />
-    </children>
+    <Button layoutX="222.0" layoutY="237.0" mnemonicParsing="false" text="Crear Usuario" onAction="#crearUsuario" />
+    <Button layoutX="178.0" layoutY="279.0" mnemonicParsing="false" text="Mostrar Detalles del Producto" onAction="#mostrarDetalles"/>
 
+    <Label fx:id="detallesLabel" layoutX="191.0" layoutY="320.0" text=" " />
+    <Label fx:id="precioLabel" layoutX="191.0" layoutY="350.0" text=" " />
+    <Label fx:id="especificacionesLabel" layoutX="191.0" layoutY="380.0" text=" " />
+    <Label fx:id="proveedorLabel" layoutX="191.0" layoutY="410.0" text=" " />
+    <Button text="Abrir ClienteFacade" layoutX="160.0" layoutY="450.0" onAction="#abrirClienteFacade" />
+    <Button text="Ver Proveedor Flyweight" layoutX="290.0" layoutY="450.0" onAction="#abrirFlyweight" />
+</children>
 </AnchorPane>

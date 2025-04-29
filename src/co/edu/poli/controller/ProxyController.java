@@ -1,5 +1,4 @@
 package co.edu.poli.controller;
-
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,40 +9,49 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+
 public class ProxyController {
 
     @FXML
     private TextField nombreUsuarioTextField;
-    
+
     @FXML
     private TextField usuarioIdTextField;
-    
+
     @FXML
     private ComboBox<String> nivelAccesoComboBox;
-    
+
     @FXML
     private Label detallesLabel;
-    
+
     @FXML
     private Label precioLabel;
-    
+
     @FXML
     private Label especificacionesLabel;
 
+    @FXML
+    private Label proveedorLabel; // Nueva etiqueta para mostrar el proveedor
+
     private ProductoProxy productoProxy;
     private Usuario usuario;
+    private Proveedor proveedorCompartido; // Instancia compartida del proveedor
 
     @FXML
     private void initialize() {
         inicializarProducto();
     }
+
     @FXML
     private void inicializarProducto() {
         Especificacion especificacion1 = new Especificacion("Pantalla", "5.5 pulgadas");
         Especificacion especificacion2 = new Especificacion("Batería", "3000 mAh");
-        ProductoReal productoReal = new ProductoReal(1, "Smartphone X", 599.99, "Un smartphone con gran rendimiento", List.of(especificacion1, especificacion2));
+
+        // la instancia compartida del proveedor
+        proveedorCompartido = new Proveedor("Tech Solutions Inc.", "Calle Falsa 123", "info@techsolutions.com");
+
+        ProductoReal productoReal = new ProductoReal(1, "Smartphone X", 599.99, "Un smartphone con gran rendimiento", List.of(especificacion1, especificacion2), proveedorCompartido);
 
         AutenticacionService autenticacionService = new AutenticacionService();
 
@@ -53,6 +61,7 @@ public class ProxyController {
         ObservableList<String> nivelesAcceso = FXCollections.observableArrayList("1", "2");
         nivelAccesoComboBox.setItems(nivelesAcceso);
     }
+
     @FXML
     public void abrirClienteFacade() {
         try {
@@ -68,7 +77,24 @@ public class ProxyController {
             e.printStackTrace();
         }
     }
+    @FXML
+    public void abrirFlyweight() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/poli/view/flyweight_view.fxml"));
+            Parent root = loader.load();
 
+            FlyweightController controller = loader.getController();
+            controller.setProducto((ProductoReal) productoProxy.getProductoReal());
+
+            Stage stage = new Stage();
+            stage.setTitle("Proveedor - Patrón Flyweight");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void crearUsuario() {
         String nombre = nombreUsuarioTextField.getText();
@@ -111,20 +137,27 @@ public class ProxyController {
             String detalles = productoProxy.obtenerDetalles(usuarioId);
             double precio = productoProxy.obtenerPrecio(usuarioId);
             String especificaciones = productoProxy.obtenerEspecificaciones(usuarioId);
+            String proveedorInfo = ((ProductoReal) productoProxy.getProductoReal()).obtenerInformacionProveedor(); // Obtener info del proveedor
 
             if (!detalles.equals("Acceso denegado a los detalles del producto.") &&
                 !especificaciones.equals("Acceso denegado a las especificaciones.")) {
                 detallesLabel.setText(detalles);
                 precioLabel.setText("Precio: " + precio);
                 especificacionesLabel.setText(especificaciones);
+                proveedorLabel.setText(proveedorInfo); // Mostrar info del proveedor
             } else {
                 detallesLabel.setText("Acceso denegado.");
                 precioLabel.setText("");
                 especificacionesLabel.setText("");
+                proveedorLabel.setText("");
             }
         } catch (NumberFormatException e) {
             detallesLabel.setText("ID de usuario inválido.");
         }
     }
 
+    // accede al ProductoReal desde el Proxy
+    public ProductoReal getProductoReal() {
+        return productoProxy.getProductoReal();
+    }
 }

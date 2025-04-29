@@ -42,4 +42,9 @@ public class ProductoProxy implements IProducto {
         }
         return "Acceso denegado a las especificaciones.";
     }
+
+    // acceder a la instancia de ProductoReal
+    public ProductoReal getProductoReal() {
+        return productoReal;
+    }
 }
