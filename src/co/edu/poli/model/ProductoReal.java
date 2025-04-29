@@ -3,13 +3,12 @@ package co.edu.poli.model;
 import java.util.List;
 
 public class ProductoReal implements IProducto {
-
     private int id;
     private String nombre;
     private double precio;
     private String descripcion;
     private List<Especificacion> especificaciones;
-    private Proveedor proveedor; //Flyweight
+    private Proveedor proveedor; // Referencia al proveedor
 
     public ProductoReal(int id, String nombre, double precio, String descripcion, List<Especificacion> especificaciones, Proveedor proveedor) {
         this.id = id;
@@ -19,14 +18,42 @@ public class ProductoReal implements IProducto {
         this.especificaciones = especificaciones;
         this.proveedor = proveedor;
     }
-    //Flyweight
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public List<Especificacion> getEspecificaciones() {
+        return especificaciones;
+    }
+
     public Proveedor getProveedor() {
         return proveedor;
     }
 
+    public String obtenerInformacionProveedor() {
+        if (proveedor != null) {
+            return "Proveedor: " + proveedor.getNombre();
+        } else {
+            return "Proveedor: No asignado";
+        }
+    }
+
     @Override
     public String obtenerDetalles(int usuarioId) {
-        return "Producto: " + nombre + " - " + descripcion;
+        return "Detalles del producto: " + nombre + ", " + descripcion;
     }
 
     @Override
@@ -36,14 +63,15 @@ public class ProductoReal implements IProducto {
 
     @Override
     public String obtenerEspecificaciones(int usuarioId) {
-        StringBuilder sb = new StringBuilder();
-        for (Especificacion e : especificaciones) {
-            sb.append(e.toString()).append("\n");
+        StringBuilder sb = new StringBuilder("Especificaciones:\n");
+        for (Especificacion spec : especificaciones) {
+            sb.append("- ").append(spec).append("\n");
         }
         return sb.toString();
     }
-    //patrón Flyweight
-    public String obtenerInformacionProveedor() {
-        return "Información del proveedor: " + proveedor.getNombre();
+
+    @Override
+    public Proveedor obtenerProveedor(int usuarioId) {
+        return this.proveedor;
     }
 }

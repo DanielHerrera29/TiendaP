@@ -11,7 +11,7 @@ public class ClienteController {
     private TextField clienteIdTextField;
 
     @FXML
-    private TextField nombreClienteTextField;  
+    private TextField nombreClienteTextField;
     @FXML
     private TextArea resumenTextArea;
 
@@ -22,6 +22,7 @@ public class ClienteController {
         InformacionPersonal info = new InformacionPersonal(1, "Juan Pérez", "juan@example.com");
         FormaDePago pago = new FormaDePago(1, "Tarjeta", true);
         HistorialPedido historial = new HistorialPedido();
+        historial.setClienteId(1); // Asegúrate de asignar el ID aquí también si es necesario para la inicialización
         historial.agregarPedido("Pedido 1 - $100");
         historial.agregarPedido("Pedido 2 - $200");
 
@@ -53,6 +54,7 @@ public class ClienteController {
             InformacionPersonal info = new InformacionPersonal(clienteId, nombre, "nuevo@example.com");
             FormaDePago pago = new FormaDePago(clienteId, "Tarjeta", true);
             HistorialPedido historial = new HistorialPedido();
+            historial.setClienteId(clienteId); // Asigna el clienteId al historial
             historial.agregarPedido("Primer pedido - $0");
 
             clienteFacade = new ClienteFacade(nuevoCliente, info, pago, historial);

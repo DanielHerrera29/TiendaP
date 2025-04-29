@@ -43,6 +43,14 @@ public class ProductoProxy implements IProducto {
         return "Acceso denegado a las especificaciones.";
     }
 
+    @Override
+    public Proveedor obtenerProveedor(int usuarioId) {
+        if (verificarAcceso(1)) {
+            return productoReal.obtenerProveedor(usuarioId);
+        }
+        return null; // O podrías retornar un proveedor "nulo" o lanzar una excepción
+    }
+
     // acceder a la instancia de ProductoReal
     public ProductoReal getProductoReal() {
         return productoReal;

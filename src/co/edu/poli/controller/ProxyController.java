@@ -32,11 +32,11 @@ public class ProxyController {
     private Label especificacionesLabel;
 
     @FXML
-    private Label proveedorLabel; // Nueva etiqueta para mostrar el proveedor
+    private Label proveedorLabel; 
 
     private ProductoProxy productoProxy;
     private Usuario usuario;
-    private Proveedor proveedorCompartido; // Instancia compartida del proveedor
+    private Proveedor proveedorCompartido; 
 
     @FXML
     private void initialize() {
@@ -55,7 +55,6 @@ public class ProxyController {
 
         AutenticacionService autenticacionService = new AutenticacionService();
 
-        // Inicializar ProductoProxy sin el usuario
         productoProxy = new ProductoProxy(productoReal, autenticacionService);
 
         ObservableList<String> nivelesAcceso = FXCollections.observableArrayList("1", "2");
@@ -111,7 +110,7 @@ public class ProxyController {
             int nivelAcceso = Integer.parseInt(nivelString);
 
             usuario = new Usuario(usuarioId, nombre, nivelAcceso);
-            productoProxy.setUsuario(usuario);  // Asignar el usuario a productoProxy
+            productoProxy.setUsuario(usuario); 
 
             detallesLabel.setText("Usuario creado: " + nombre + " con nivel de acceso " + nivelAcceso);
         } catch (NumberFormatException e) {
@@ -137,14 +136,19 @@ public class ProxyController {
             String detalles = productoProxy.obtenerDetalles(usuarioId);
             double precio = productoProxy.obtenerPrecio(usuarioId);
             String especificaciones = productoProxy.obtenerEspecificaciones(usuarioId);
-            String proveedorInfo = ((ProductoReal) productoProxy.getProductoReal()).obtenerInformacionProveedor(); // Obtener info del proveedor
+            Proveedor proveedor = productoProxy.obtenerProveedor(usuarioId); 
 
             if (!detalles.equals("Acceso denegado a los detalles del producto.") &&
                 !especificaciones.equals("Acceso denegado a las especificaciones.")) {
                 detallesLabel.setText(detalles);
                 precioLabel.setText("Precio: " + precio);
-                especificacionesLabel.setText(especificaciones);
-                proveedorLabel.setText(proveedorInfo); // Mostrar info del proveedor
+               
+                especificacionesLabel.setText(especificaciones.replace("\n", "<br>"));
+                if (proveedor != null) {
+                    proveedorLabel.setText("Proveedor: " + proveedor.getNombre());
+                } else {
+                    proveedorLabel.setText("Proveedor: No disponible");
+                }
             } else {
                 detallesLabel.setText("Acceso denegado.");
                 precioLabel.setText("");
@@ -156,7 +160,7 @@ public class ProxyController {
         }
     }
 
-    // accede al ProductoReal desde el Proxy
+    
     public ProductoReal getProductoReal() {
         return productoProxy.getProductoReal();
     }

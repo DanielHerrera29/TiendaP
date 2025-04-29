@@ -25,7 +25,15 @@ public class ClienteFacade {
         resumen.append(pago.obtenerFormaPago()).append("\n");
         resumen.append("Historial de Pedidos:\n");
 
-        historial.listarPedidoCliente(clienteId);
+        // historial de pedidos
+        java.util.List<String> listaPedidos = historial.obtenerPedidos();
+        if (listaPedidos.isEmpty()) {
+            resumen.append("No hay pedidos registrados para este cliente.\n");
+        } else {
+            for (String pedido : listaPedidos) {
+                resumen.append("- ").append(pedido).append("\n");
+            }
+        }
 
         return resumen.toString();
     }

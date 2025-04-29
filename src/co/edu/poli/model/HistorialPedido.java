@@ -15,6 +15,13 @@ public class HistorialPedido {
         this.fecha = new Date();
     }
 
+    public void setClienteId(int clienteId) {
+        this.clienteId = clienteId;
+    }
+
+    public int getClienteId() {
+        return clienteId;
+    }
 
     public void mostrarHistorial() {
         System.out.println("Historial de pedidos del cliente " + clienteId + ":");
@@ -38,5 +45,10 @@ public class HistorialPedido {
     public void agregarPedido(String pedido) {
         pedidos.add(pedido);
         System.out.println("Pedido agregado: " + pedido);
+    }
+
+   
+    public List<String> obtenerPedidos() {
+        return this.pedidos;
     }
 }
