@@ -4,6 +4,7 @@ import co.edu.poli.model.*;
 
 public class ProductoController {
 
+	
     private Producto producto;
     private HistorialPrecios historial;
 
