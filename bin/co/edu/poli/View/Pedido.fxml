@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:controller="co.edu.poli.Controller.PedidoController"
+            xmlns:fx="http://javafx.com/fxml" prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <TextField fx:id="txtCliente" layoutX="20" layoutY="20" promptText="Nombre Cliente" />
+        <TextField fx:id="txtProducto" layoutX="20" layoutY="60" promptText="Producto" />
+        <TextField fx:id="txtPrecio" layoutX="200" layoutY="60" promptText="Precio" />
+
+        <Button fx:id="btnAgregarProducto" layoutX="400" layoutY="60" text="Agregar Producto" />
+        
+        <TextArea fx:id="areaCarrito" layoutX="20" layoutY="100" prefHeight="180" prefWidth="560"/>
+
+        <ComboBox fx:id="comboPago" layoutX="20" layoutY="300" prefWidth="150"/>
+        
+        <Button fx:id="btnProcesarPago" layoutX="400" layoutY="300" text="Procesar Pago"/>
+    </children>
+</AnchorPane>
