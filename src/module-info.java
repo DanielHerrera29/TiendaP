@@ -1,6 +1,7 @@
 module Actividad11 {
     requires javafx.controls;
     requires javafx.fxml;
+	requires javafx.graphics;
 
     opens co.edu.poli.Controller to javafx.fxml;
     opens co.edu.poli.View to javafx.graphics, javafx.fxml;

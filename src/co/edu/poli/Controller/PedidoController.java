@@ -43,7 +43,7 @@ public class PedidoController {
         }
 
         double precio = Double.parseDouble(precioStr);
-        Producto producto = new Producto(nombreProd, precio);
+        Producto producto = new Producto(0, nombreProd, precio);
         pedido.agregarProducto(producto);
         areaCarrito.appendText(producto.getNombre() + " - $" + producto.getPrecio() + "\n");
 

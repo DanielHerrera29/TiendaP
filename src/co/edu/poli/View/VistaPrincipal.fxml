@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.poli.View.VistaPrincipal"
+      alignment="CENTER"
+      spacing="15.0"
+      prefWidth="400.0"
+      prefHeight="400.0">
+    
+    <Label text="Seleccione un patrón" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+
+    <Button fx:id="botonComando" text="Comando" />
+    <Button fx:id="botonEstrategia" text="Estrategia" />
+    <Button fx:id="botonResponsabilidad" text="Responsabilidad" />
+</VBox>
