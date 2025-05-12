@@ -32,7 +32,9 @@ public class PedidoController {
                 mostrarAlerta("Debe ingresar un nombre de cliente.");
                 return;
             }
-            pedido = new Pedido(new Cliente(nombreCliente, ""));
+            //pedido = new Pedido(new Cliente(nombreCliente, ""));
+            pedido = new Pedido(new Cliente(nombreCliente, "", "", "Básico"));
+            
         }
 
         String nombreProd = txtProducto.getText();

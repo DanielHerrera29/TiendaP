@@ -17,4 +17,5 @@
     <Button fx:id="botonComando" text="Comando" />
     <Button fx:id="botonEstrategia" text="Estrategia" />
     <Button fx:id="botonResponsabilidad" text="Responsabilidad" />
+    <Button text=" Crear Cliente" layoutX="180" layoutY="20" onAction="#RegistrarCliente" />
 </VBox>
