@@ -77,7 +77,6 @@ public class ClienteController {
         cmbCategoria.setItems(categorias);
         cmbCategoria.setValue("Básico");
 
-        // Usa la clase PropertyValueFactory
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colCorreo.setCellValueFactory(new PropertyValueFactory<>("email"));
         colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
@@ -209,12 +208,15 @@ public class ClienteController {
                 }
             }
         } else {
-            if (txtNombre.getText().trim().isEmpty())
+            if (txtNombre.getText().trim().isEmpty()) {
                 lblNombreError.setText("El nombre es obligatorio.");
-            if (txtCorreo.getText().trim().isEmpty())
+            }
+            if (txtCorreo.getText().trim().isEmpty()) {
                 lblCorreoError.setText("El correo es obligatorio.");
-            if (txtDireccion.getText().trim().isEmpty())
+            }
+            if (txtDireccion.getText().trim().isEmpty()) {
                 lblDireccionError.setText("La dirección es obligatoria.");
+            }
         }
     }
 
@@ -266,12 +268,15 @@ public class ClienteController {
             btnGuardarEdicion.setManaged(false);
 
         } else {
-            if (txtNombre.getText().trim().isEmpty())
+            if (txtNombre.getText().trim().isEmpty()) {
                 lblNombreError.setText("El nombre es obligatorio.");
-            if (txtCorreo.getText().trim().isEmpty())
+            }
+            if (txtCorreo.getText().trim().isEmpty()) {
                 lblCorreoError.setText("El correo es obligatorio.");
-            if (txtDireccion.getText().trim().isEmpty())
+            }
+            if (txtDireccion.getText().trim().isEmpty()) {
                 lblDireccionError.setText("La dirección es obligatoria.");
+            }
         }
     }
 
