@@ -19,7 +19,7 @@ public class MensajeBienvenidaHandler extends ClienteHandler {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Bienvenido");
         alert.setHeaderText(null);
-        alert.setContentText("¡Bienvenido, " + cliente.getNombre() + " ya esta registrado!");
+        alert.setContentText( "¡Bienvenido/a, " + cliente.getNombre() + "! Tu registro ha sido creada." );
         alert.showAndWait();
 
       

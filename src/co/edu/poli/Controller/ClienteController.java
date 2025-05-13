@@ -14,52 +14,30 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class ClienteController {
+    @FXML private TextField txtNombre;
+    @FXML private TextField txtCorreo;
+    @FXML private TextField txtDireccion;
+    @FXML private ComboBox<String> cmbCategoria;
+    @FXML private Label lblNombreError;
+    @FXML private Label lblCorreoError;
+    @FXML private Label lblDireccionError;
+    @FXML private Label lblCategoriaError;
+    @FXML private TextField txtMontoCompraMensual;
+    @FXML private TextField txtBeneficios;
 
-    @FXML
-    private TextField txtNombre;
-    @FXML
-    private TextField txtCorreo;
-    @FXML
-    private TextField txtDireccion;
-    @FXML
-    private ComboBox<String> cmbCategoria;
-    @FXML
-    private Label lblNombreError;
-    @FXML
-    private Label lblCorreoError;
-    @FXML
-    private Label lblDireccionError;
-    @FXML
-    private Label lblCategoriaError;
-
-    @FXML
-    private TextField txtMontoCompraMensual;
-    @FXML
-    private TextField txtBeneficios;
-
-    @FXML
-    private TableView<Cliente> tablaClientes;
-    @FXML
-    private TableColumn<Cliente, String> colNombre;
-    @FXML
-    private TableColumn<Cliente, String> colCorreo;
-    @FXML
-    private TableColumn<Cliente, String> colDireccion;
-    @FXML
-    private TableColumn<Cliente, String> colCategoria;
-    @FXML
-    private TableColumn<Cliente, String> colBeneficios;
-    @FXML
-    private TableColumn<Cliente, Double> colMontoCompraMensual;
-    @FXML
-    private Button btnGuardarEdicion;
-
+    @FXML private TableView<Cliente> tablaClientes;
+    @FXML private TableColumn<Cliente, String> colNombre;
+    @FXML private TableColumn<Cliente, String> colCorreo;
+    @FXML private TableColumn<Cliente, String> colDireccion;
+    @FXML private TableColumn<Cliente, String> colCategoria;
+    @FXML private TableColumn<Cliente, String> colBeneficios;
+    @FXML private TableColumn<Cliente, Double> colMontoCompraMensual;
+    @FXML private Button btnGuardarEdicion;
     private ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
     private Cliente clienteAEditar;
     private ClienteController controller;
@@ -68,14 +46,12 @@ public class ClienteController {
     private boolean clienteValidoParaRegistro = true;
     private String mensajeErrorCorreo = "";
     private String mensajeErrorDireccion = "";
-
     @FXML
     public void initialize() {
         controller = this;
 
         ObservableList<String> categorias = FXCollections.observableArrayList("Básico", "Plata", "Oro", "Premium");
         cmbCategoria.setItems(categorias);
-        cmbCategoria.setValue("Básico");
 
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colCorreo.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -83,7 +59,7 @@ public class ClienteController {
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
         colBeneficios.setCellValueFactory(new PropertyValueFactory<>("beneficios"));
         colMontoCompraMensual.setCellValueFactory(new PropertyValueFactory<>("montocompraMensual"));
-
+        // Columna para los botones de Editar y Eliminar
         TableColumn<Cliente, Void> colAcciones = new TableColumn<>("Acciones");
         colAcciones.setMinWidth(100);
         colAcciones.setCellFactory(new Callback<TableColumn<Cliente, Void>, TableCell<Cliente, Void>>() {
@@ -93,7 +69,6 @@ public class ClienteController {
                     private final HBox buttons = new HBox(10);
                     private final Button editButton = new Button("Editar");
                     private final Button deleteButton = new Button("Eliminar");
-
                     {
                         editButton.setOnAction(event -> {
                             Cliente cliente = getTableView().getItems().get(getIndex());
@@ -106,7 +81,6 @@ public class ClienteController {
                         buttons.getChildren().addAll(editButton, deleteButton);
                         buttons.setAlignment(Pos.CENTER);
                     }
-
                     @Override
                     protected void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
@@ -119,7 +93,6 @@ public class ClienteController {
                 };
             }
         });
-
         tablaClientes.getColumns().add(colAcciones);
 
         tablaClientes.setItems(listaClientes);
@@ -130,13 +103,11 @@ public class ClienteController {
         DireccionValidacionHandler direccionHandler = new DireccionValidacionHandler(this);
         BeneficiosClienteHandler beneficiosClienteHandler = new BeneficiosClienteHandler();
         MensajeBienvenidaHandler bienvenidaHandler = new MensajeBienvenidaHandler(this);
-
         emailHandler.setNext(duplicadoHandler);
         duplicadoHandler.setNext(categoriaHandler);
         categoriaHandler.setNext(direccionHandler);
         direccionHandler.setNext(beneficiosClienteHandler);
         beneficiosClienteHandler.setNext(bienvenidaHandler);
-
         this.handlerChain = emailHandler;
 
         cmbCategoria.setOnAction(event -> {
@@ -146,35 +117,36 @@ public class ClienteController {
 
     public void setMensajeErrorCorreo(String mensaje) {
         this.mensajeErrorCorreo = mensaje;
-        lblCorreoError.setText(mensajeErrorCorreo);
+        lblCorreoError.setText(mensaje);
     }
-
     public void setMensajeErrorDireccion(String mensaje) {
         this.mensajeErrorDireccion = mensaje;
-        lblDireccionError.setText(mensajeErrorDireccion);
+        lblDireccionError.setText(mensaje);
     }
 
     public void setClienteValidoParaRegistro(boolean valido) {
         this.clienteValidoParaRegistro = valido;
     }
-
     @FXML
     public void registrarCliente() {
         if (validarCamposBasicos()) {
             String categoriaSeleccionada = cmbCategoria.getValue();
-
+            if (categoriaSeleccionada == null || categoriaSeleccionada.isEmpty()) {
+                lblCategoriaError.setText("La categoría es obligatoria.");
+                return;
+            }
             Cliente nuevoCliente = new Cliente(
                     txtNombre.getText().trim(),
                     txtCorreo.getText().trim(),
                     txtDireccion.getText().trim(),
                     categoriaSeleccionada
             );
-
             clienteValidoParaRegistro = true;
             mensajeErrorCorreo = "";
             mensajeErrorDireccion = "";
             lblCorreoError.setText("");
             lblDireccionError.setText("");
+            lblCategoriaError.setText("");
 
             handlerChain.handle(nuevoCliente);
 
@@ -190,7 +162,7 @@ public class ClienteController {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Error de Registro");
                     alert.setHeaderText(null);
-                    StringBuilder content = new StringBuilder("Por favor,");
+                    StringBuilder content = new StringBuilder("");
                     if (!mensajeErrorCorreo.isEmpty()) {
                         content.append("- ").append(mensajeErrorCorreo).append("\n");
                     }
@@ -208,15 +180,10 @@ public class ClienteController {
                 }
             }
         } else {
-            if (txtNombre.getText().trim().isEmpty()) {
-                lblNombreError.setText("El nombre es obligatorio.");
-            }
-            if (txtCorreo.getText().trim().isEmpty()) {
-                lblCorreoError.setText("El correo es obligatorio.");
-            }
-            if (txtDireccion.getText().trim().isEmpty()) {
-                lblDireccionError.setText("La dirección es obligatoria.");
-            }
+            if (txtNombre.getText().trim().isEmpty()) lblNombreError.setText("El nombre es obligatorio.");
+            if (txtCorreo.getText().trim().isEmpty()) lblCorreoError.setText("El correo es obligatorio.");
+            if (txtDireccion.getText().trim().isEmpty()) lblDireccionError.setText("La dirección es obligatoria.");
+            if (cmbCategoria.getValue() == null || cmbCategoria.getValue().isEmpty()) lblCategoriaError.setText("La categoría es obligatoria.");
         }
     }
 
@@ -237,29 +204,25 @@ public class ClienteController {
     @FXML
     public void guardarEdicionCliente() {
         if (clienteAEditar != null && validarCamposBasicos()) {
+            String categoriaSeleccionada = cmbCategoria.getValue();
+            if (categoriaSeleccionada == null || categoriaSeleccionada.isEmpty()) {
+                lblCategoriaError.setText("La categoría es obligatoria.");
+                return;
+            }
 
             clienteAEditar.setNombre(txtNombre.getText().trim());
             clienteAEditar.setEmail(txtCorreo.getText().trim());
             clienteAEditar.setDireccion(txtDireccion.getText().trim());
-            clienteAEditar.setCategoria(cmbCategoria.getValue());
+            clienteAEditar.setCategoria(categoriaSeleccionada);
 
             BeneficiosClienteHandler beneficiosClienteHandler = new BeneficiosClienteHandler();
             beneficiosClienteHandler.handle(clienteAEditar);
-            actualizarCamposBeneficios(clienteAEditar.getCategoria());
 
-            int index = -1;
-            for (int i = 0; i < listaClientes.size(); i++) {
-                if (listaClientes.get(i).equals(clienteAEditar)) {
-                    index = i;
-                    break;
-                }
-            }
+            int index = listaClientes.indexOf(clienteAEditar);
 
             if (index >= 0) {
                 listaClientes.set(index, clienteAEditar);
                 tablaClientes.refresh();
-            } else {
-                System.out.println("¡Error! No se encontró el cliente a editar en la lista.");
             }
 
             limpiarCampos();
@@ -268,15 +231,10 @@ public class ClienteController {
             btnGuardarEdicion.setManaged(false);
 
         } else {
-            if (txtNombre.getText().trim().isEmpty()) {
-                lblNombreError.setText("El nombre es obligatorio.");
-            }
-            if (txtCorreo.getText().trim().isEmpty()) {
-                lblCorreoError.setText("El correo es obligatorio.");
-            }
-            if (txtDireccion.getText().trim().isEmpty()) {
-                lblDireccionError.setText("La dirección es obligatoria.");
-            }
+            if (txtNombre.getText().trim().isEmpty()) lblNombreError.setText("El nombre es obligatorio.");
+            if (txtCorreo.getText().trim().isEmpty()) lblCorreoError.setText("El correo es obligatorio.");
+            if (txtDireccion.getText().trim().isEmpty()) lblDireccionError.setText("La dirección es obligatoria.");
+            if (cmbCategoria.getValue() == null || cmbCategoria.getValue().isEmpty()) lblCategoriaError.setText("La categoría es obligatoria.");
         }
     }
 
@@ -292,10 +250,12 @@ public class ClienteController {
         lblNombreError.setText("");
         lblCorreoError.setText("");
         lblDireccionError.setText("");
+        lblCategoriaError.setText("");
 
         String nombre = txtNombre.getText().trim();
         String correo = txtCorreo.getText().trim();
         String direccion = txtDireccion.getText().trim();
+        String categoria = cmbCategoria.getValue();
 
         if (nombre.isEmpty()) {
             esValido = false;
@@ -309,6 +269,10 @@ public class ClienteController {
             esValido = false;
         }
 
+        if (categoria == null || categoria.isEmpty()) {
+            esValido = false;
+        }
+
         return esValido;
     }
 
@@ -316,7 +280,7 @@ public class ClienteController {
         txtNombre.clear();
         txtCorreo.clear();
         txtDireccion.clear();
-        cmbCategoria.setValue("Básico");
+        cmbCategoria.setValue(null);
         txtMontoCompraMensual.clear();
         txtBeneficios.clear();
     }
@@ -337,12 +301,19 @@ public class ClienteController {
 
     private void actualizarBeneficios() {
         String categoriaSeleccionada = cmbCategoria.getValue();
+        if (categoriaSeleccionada == null || categoriaSeleccionada.isEmpty()) {
+            actualizarCamposBeneficios(null);
+            return;
+        }
         actualizarCamposBeneficios(categoriaSeleccionada);
+
 
         if (clienteAEditar != null) {
             clienteAEditar.setCategoria(categoriaSeleccionada);
             BeneficiosClienteHandler beneficiosClienteHandler = new BeneficiosClienteHandler();
             beneficiosClienteHandler.handle(clienteAEditar);
+            clienteAEditar.setBeneficios(clienteAEditar.getBeneficios());
+            clienteAEditar.setMontocompraMensual(clienteAEditar.getMontocompraMensual());
         }
     }
 
@@ -350,28 +321,30 @@ public class ClienteController {
         String beneficiosTexto = "";
         String montoCompraTexto = "";
 
-        switch (categoria) {
-            case "Nuevo":
-            case "Básico":
-                beneficiosTexto = "5% de descuento en primera compra, Newsletter semanal";
-                montoCompraTexto = "N/A";
-                break;
-            case "Plata":
-                beneficiosTexto = "10% de descuento, Envío estándar gratuito";
-                montoCompraTexto = "500.000 - 700.000";
-                break;
-            case "Oro":
-                beneficiosTexto = "15% de descuento, Atención prioritaria";
-                montoCompraTexto = "800.000 - 1.000.000";
-                break;
-            case "Premium":
-                beneficiosTexto = "20% de descuento";
-                montoCompraTexto = "1.100.000 - 1.300.000";
-                break;
-            default:
-                beneficiosTexto = "";
-                montoCompraTexto = "";
-                break;
+        if (categoria != null) {
+            switch (categoria) {
+                case "Nuevo":
+                case "Básico":
+                    beneficiosTexto = "5% de descuento en primera compra, Newsletter semanal";
+                    montoCompraTexto = "N/A";
+                    break;
+                case "Plata":
+                    beneficiosTexto = "10% de descuento, Envío estándar gratuito";
+                    montoCompraTexto = "500.000 - 700.000";
+                    break;
+                case "Oro":
+                    beneficiosTexto = "15% de descuento, Atención prioritaria";
+                    montoCompraTexto = "800.000 - 1.000.000";
+                    break;
+                case "Premium":
+                    beneficiosTexto = "20% de descuento";
+                    montoCompraTexto = "1.100.000 - 1.300.000";
+                    break;
+                default:
+                    beneficiosTexto = "";
+                    montoCompraTexto = "";
+                    break;
+            }
         }
         txtBeneficios.setText(beneficiosTexto);
         txtMontoCompraMensual.setText(montoCompraTexto);

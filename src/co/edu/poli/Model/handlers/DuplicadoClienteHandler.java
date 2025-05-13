@@ -4,7 +4,6 @@ import co.edu.poli.Controller.ClienteController;
 import co.edu.poli.Model.Cliente;
 import java.util.Set;
 
-
 public class DuplicadoClienteHandler extends ClienteHandler {
     private Set<String> correosRegistrados;
     private ClienteController controller;
@@ -17,12 +16,15 @@ public class DuplicadoClienteHandler extends ClienteHandler {
     @Override
     public void handle(Cliente cliente) {
         if (correosRegistrados.contains(cliente.getEmail())) {
+            System.out.println("Cliente ya registrado.");
+          
             if (controller != null) {
                 controller.setClienteValidoParaRegistro(false);
-                controller.setMensajeErrorCorreo("Ya se encuentra registrado el correo.");
+                controller.setMensajeErrorCorreo("Ya se encuentra registrado un cliente con el correo.");
             }
-            return;
+            return; 
         }
+        correosRegistrados.add(cliente.getEmail());
         super.handle(cliente);
     }
 }
