@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="co.edu.poli.Controller.ProductoController"
+      prefWidth="400.0" prefHeight="400.0">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <TextField fx:id="txtId" promptText="ID del producto"/>
+    <TextField fx:id="txtNombre" promptText="Nombre del producto"/>
+    <Button text="Crear Producto" onAction="#crearProducto"/>
+    <Button text="Actualizar Producto" onAction="#actualizarProducto"/>
+
+</VBox>

@@ -38,7 +38,7 @@ public class VistaPrincipal {
     }
 
     private void abrirVistaResponsabilidad(ActionEvent event) {
-        cargarVista("responsabilidad.fxml");
+        cargarVista("Cliente.fxml");
     }
 
     private void cargarVista(String fxml) {
@@ -62,17 +62,4 @@ public class VistaPrincipal {
         }
     }
 
-    @FXML
-    private void RegistrarCliente(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/poli/View/Cliente.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Registrar Cliente");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
