@@ -1,7 +1,6 @@
-package co.edu.poli.Model.handlers;
+package co.edu.poli.Model;
 
 import co.edu.poli.Controller.ClienteController;
-import co.edu.poli.Model.Cliente;
 
 public class DireccionValidacionHandler extends ClienteHandler {
     private ClienteController controller;

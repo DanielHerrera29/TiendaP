@@ -1,6 +1,13 @@
 package co.edu.poli.Controller;
 
+import co.edu.poli.Model.AsignacionCategoriaHandler;
+import co.edu.poli.Model.BeneficiosClienteHandler;
 import co.edu.poli.Model.Cliente;
+import co.edu.poli.Model.ClienteHandler;
+import co.edu.poli.Model.DireccionValidacionHandler;
+import co.edu.poli.Model.DuplicadoClienteHandler;
+import co.edu.poli.Model.EmailValidacionHandler;
+import co.edu.poli.Model.MensajeBienvenidaHandler;
 import co.edu.poli.Model.handlers.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

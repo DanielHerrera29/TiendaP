@@ -1,7 +1,7 @@
-package co.edu.poli.Model.handlers;
+package co.edu.poli.Model;
 
 import co.edu.poli.Controller.ClienteController;
-import co.edu.poli.Model.Cliente;
+
 import java.util.Set;
 
 public class DuplicadoClienteHandler extends ClienteHandler {

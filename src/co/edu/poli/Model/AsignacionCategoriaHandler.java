@@ -1,6 +1,4 @@
-package co.edu.poli.Model.handlers;
-
-import co.edu.poli.Model.Cliente;
+package co.edu.poli.Model;
 
 public class AsignacionCategoriaHandler extends ClienteHandler {
     @Override

@@ -11,7 +11,6 @@ public class Cliente {
     private final StringProperty id = new SimpleStringProperty();
     private final StringProperty nombre = new SimpleStringProperty();
     private final StringProperty email = new SimpleStringProperty();
-    private final StringProperty telefono = new SimpleStringProperty();
     private final StringProperty direccion = new SimpleStringProperty();
     private final StringProperty categoria = new SimpleStringProperty();
     private final DoubleProperty montocompraMensual = new SimpleDoubleProperty(0.0); 
