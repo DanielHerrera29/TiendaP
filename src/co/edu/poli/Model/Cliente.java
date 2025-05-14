@@ -34,7 +34,6 @@ public class Cliente {
     public StringProperty idProperty() { return id; }
     public StringProperty nombreProperty() { return nombre; }
     public StringProperty emailProperty() { return email; }
-    public StringProperty telefonoProperty() { return telefono; }
     public StringProperty direccionProperty() { return direccion; }
     public StringProperty categoriaProperty() { return categoria; }
     public DoubleProperty montocompraMensualProperty() { return montocompraMensual; }
@@ -49,9 +48,6 @@ public class Cliente {
 
     public String getEmail() { return email.get(); }
     public void setEmail(String value) { email.set(value); }
-
-    public String getTelefono() { return telefono.get(); }
-    public void setTelefono(String value) { telefono.set(value); }
 
     public String getDireccion() { return direccion.get(); }
     public void setDireccion(String value) { direccion.set(value); }
